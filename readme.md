@@ -11,7 +11,7 @@ Welcome to the my worklog repository!
 
 The **Openwhisk Workshop** is focused on serverless computing using Apache OpenWhisk.
 
-For more details, see the [Openwhisk Workshop Log](#openwhisk-workshop).
+For more details, see the [Openwhisk Workshop Log](/Openwhisk_workshop/).
 
 ## Other Projects
 
