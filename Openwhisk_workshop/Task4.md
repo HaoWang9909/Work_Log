@@ -193,11 +193,21 @@ db_port=5984
 
 Modify`openwhisk/ansible/roles/invoker/tasks/deploy.yml`
 
-Change Task start invoker (line440) to:
+Change Task `start invoker`  (line440) to:
 
 ```bash
   image: "{{ docker_registry }}openwhisk/invoker:nightly"
 ```
+
+Modify`openwhisk/ansible/roles/controller/tasks/deploy.yml`
+
+Change Task`warm up activation path` (line462)to:
+
+```scala
+     "{{controller.protocol}}://{{ lookup('file', '{{ catalog_auth_key }}')}}@{{ansible_host}}:{{controller_port}}/api/v1/namespaces/_/actions/invokerHealthTestAction{{controller_index}}?blocking=true&result=false"
+```
+
+Mainly change `blocking=false` to `blocking=true`
 
 Run again
 
