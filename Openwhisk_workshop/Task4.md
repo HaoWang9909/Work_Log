@@ -26,7 +26,7 @@ Install wsk on local computer
 My computer is a Mac
 
 ```bash
-brew update 
+brew update
 brew install wsk
 ```
 
@@ -53,7 +53,7 @@ function main(params) {
 ```
 
 ```bash
-wsk -i action create client_hello client_hello.js 
+wsk -i action create client_hello client_hello.js
 ```
 
 ```bash
@@ -73,7 +73,7 @@ Success!
 Check actionlist
 
 ```bash
-wsk -i action list                           
+wsk -i action list
 actions
 /guest/client_hello                                                    private nodejs:20
 /guest/hello                                                           private nodejs:20
@@ -123,14 +123,14 @@ cd ubuntu-setup
 
 ```bash
 sudo groupadd docker
-sudo usermod -aG docker $USER	
+sudo usermod -aG docker $USER
 newgrp docker
 sudo systemctl start docker
 ```
 
 Return to the master control node
 
-Modify `openwhisk/ansible/environments/local/hosts.j2.ini` 
+Modify `openwhisk/ansible/environments/local/hosts.j2.ini`
 
 ```
 ; the first parameter in a host is the inventory_hostname
@@ -191,7 +191,7 @@ db_host=<master_node_address>
 db_port=5984
 ```
 
-Modify`openwhisk/ansible/roles/invoker/tasks/deploy.yml` 
+Modify`openwhisk/ansible/roles/invoker/tasks/deploy.yml`
 
 Change Task start invoker (line440) to:
 
@@ -213,6 +213,7 @@ cd ansible
 sudo ansible-playbook -i environments/$ENVIRONMENT couchdb.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT initdb.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT wipe.yml
+sudo ansible-playbook -i environments/$ENVIRONMENT elasticsearch.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT openwhisk.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT postdeploy.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT apigateway.yml
@@ -223,7 +224,7 @@ Test
 
 Use `docker ps` in both machines to see if it is successful.
 
-Create a function locally`distribute_hello.js` 
+Create a function locally`distribute_hello.js`
 
 ```bash
  /**
@@ -242,4 +243,3 @@ wsk -i action invoke distribute_hello --result
 ```
 
 success!
-
