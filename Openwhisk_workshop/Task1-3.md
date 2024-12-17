@@ -212,19 +212,10 @@ It is found that the username and password inside are still incorrect.
 
 Change it.
 
-Then go to`/openwhisk/common/scala/src/main/resources/reference.conf` and change to this:
+Then go to`/openwhisk/ansible/environments/local/group_vars/all` and add this:
 
 ```bash
-  DurationCheckerProvider = org.apache.openwhisk.core.scheduler.queue.NoopDurationCheckerProvider
-```
-
-go to `/home/exouser/openwhisk/ansible/group_vars/all` and change to this
-
-```bash
-  artifact_store:
-    backend: "CouchDB"
-  activation_store:
-    backend: "CouchDB"
+db_activation_backend: ElasticSearch
 ```
 
 Then

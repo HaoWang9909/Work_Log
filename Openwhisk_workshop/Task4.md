@@ -166,6 +166,9 @@ scheduler0       ansible_host=<master_node_address> ansible_connection=local
 [db]
 <master_node_address>         ansible_host=<master_node_address> ansible_connection=local
 
+[elasticsearch:children]
+db
+
 [redis]
 <master_node_address>          ansible_host=<master_node_address> ansible_connection=local
 
@@ -211,6 +214,9 @@ sudo ansible-playbook -i environments/$ENVIRONMENT couchdb.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT initdb.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT wipe.yml
 sudo ansible-playbook -i environments/$ENVIRONMENT openwhisk.yml
+sudo ansible-playbook -i environments/$ENVIRONMENT postdeploy.yml
+sudo ansible-playbook -i environments/$ENVIRONMENT apigateway.yml
+sudo ansible-playbook -i environments/$ENVIRONMENT routemgmt.yml
 ```
 
 Test
