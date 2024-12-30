@@ -193,10 +193,21 @@ db_port=5984
 
 Modify`openwhisk/ansible/roles/invoker/tasks/deploy.yml`
 
-Change Task `start invoker`  (line440) to:
+Add these lines before Task `start invoker` (line440) :
 
 ```bash
-  image: "{{ docker_registry }}openwhisk/invoker:nightly"
+- name: Save invoker Docker image
+  command: docker save -o /tmp/invoker.tar whisk/invoker:latest
+  delegate_to: localhost
+  run_once: true
+
+- name: Copy invoker image to all Invoker machines
+  copy:
+    src: /tmp/invoker.tar
+    dest: /tmp/invoker.tar
+
+- name: Load invoker Docker image on Invoker machines
+  command: docker load -i /tmp/invoker.tar
 ```
 
 Modify`openwhisk/ansible/roles/controller/tasks/deploy.yml`
